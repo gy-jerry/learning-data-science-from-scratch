@@ -41,3 +41,6 @@ plt.title("My Favorite Movies")
 plt.xticks([i + 0.5 for i, _ in enumerate(movies)], movies)
 
 plt.show()
+
+
+# 直方图
