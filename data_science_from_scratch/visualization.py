@@ -9,12 +9,14 @@ from collections import Counter
 
 # settings
 # 用来正常显示中文标签
-plt.rcParams['font.sans-serif']=['SimHei']
+plt.rcParams['font.sans-serif'] = ['SimHei']
 # 用来正常显示负号
-plt.rcParams['axes.unicode_minus']=False
+plt.rcParams['axes.unicode_minus'] = False
+# 参考：https://segmentfault.com/a/1190000005144275
 
-'''
-# 线图
+
+# '''
+# 简单线图
 years = [1950, 1960, 1970, 1980, 1990, 2000, 2010]
 gdp = [300, 543, 1075, 2862, 5979, 10289, 14958]
 
@@ -23,10 +25,10 @@ plt.title('GDP')
 # 使用中文的方法
 plt.ylabel(u'十亿')
 plt.show()
-'''
+# '''
 
 
-'''
+# '''
 # 条形图
 movies = ["Annie Hall", "Ben-Hur", "Casablanca", "Gandhi", "West Side Story"]
 num_oscars = [5, 11, 3, 8, 10]
@@ -54,10 +56,10 @@ plt.show()
 #     print index, text
 # 默认从0开始计数，即索引；也可以传入第二个参数，表示从多少开始计数
 # print list(enumerate(movies, 2))
-'''
+# '''
 
 
-'''
+# '''
 # 直方图
 grades = [83, 95, 91, 87, 70, 0, 85, 82, 100, 67, 73, 77, 0]
 # decile = lambda grade: grade // 10 * 10
@@ -103,6 +105,7 @@ plt.show()
 # lambda并不会带来程序效率的提高，只会是代码更简洁
 # 如果可以使用for ... in ... if ... 来完成的，不要使用lambda
 # 如果使用lambda，不要在内部使用循环，如果有，定义函数，获得重用性和更好的可读性
+# 参考：http://www.cnblogs.com/evening/archive/2012/03/29/2423554.html
 #
 
 # 直方图或柱状图：
@@ -111,10 +114,10 @@ plt.show()
 # 指定横纵坐标范围：
 # 为把处于边缘的条形显示完全，常将横坐标范围略扩大（上面的例子数据range为0,100）；
 # 为了不误导读图，纵坐标常从0开始（一般如此，视情况而定）
-'''
+# '''
 
 
-'''
+# '''
 # 线图
 variance = [1, 2, 4, 8, 16, 32, 64, 128, 256]
 bias_squared = [256, 128, 64, 32, 16, 8, 4, 2, 1]
@@ -166,4 +169,43 @@ plt.show()
 #
 # [(1, 2, 3), ('a', 'b', 'c')]
 #
-'''
+# '''
+
+
+# '''
+# 散点图
+friends = [70, 65, 72, 63, 71, 64, 60, 64, 67]
+minutes = [175, 170, 205, 120, 220, 130, 105, 145, 190]
+labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
+
+plt.scatter(friends, minutes)
+
+# label each point
+for label, friend_count, minute_count in zip(labels, friends, minutes):
+    plt.annotate(label,
+                 xy=(friend_count, minute_count),  # put the label with its point
+                 xytext=(5, 0),  # but slightly offset 避免标记与点重合
+                 textcoords='offset points')
+
+plt.title("Daily Minutes vs. Number of Friends")
+plt.xlabel("# of friends")
+plt.ylabel("daily minutes spent on the site")
+plt.show()
+
+for equal_axes in [False, True]:
+    test_1_grades = [99, 90, 85, 97, 80]
+    test_2_grades = [100, 85, 60, 90, 70]
+
+    plt.scatter(test_1_grades, test_2_grades)
+    plt.xlabel("test 1 grade")
+    plt.ylabel("test 2 grade")
+
+    if equal_axes:
+        plt.title("Axes Are Comparable")
+        # 绘制散点图，当两个坐标轴表示的实际意义相关，需要使两个坐标轴尺度一致
+        plt.axis("equal")
+    else:
+        plt.title("Axes Aren't Comparable")
+
+    plt.show()
+# '''
